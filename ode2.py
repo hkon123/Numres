@@ -61,7 +61,9 @@ class Ode(object):
         plt.show()
 
 
-#A= Ode(0.01, 750, cos(x), 0)
-#a = A.euler()
-#b = A.RK4()
-#A.plottwo(a,b)
+    def plotDiff(self, coords1, coords2):
+        ax = plt.axes()
+        for i in range(self.steps):
+            ax.add_patch(patches.Circle((coords1[i,0],coords1[i,1]-coords2[i,1]), 0.0005, color = 'b'))
+            plt.ylim(-0.01,0.01)
+        plt.show()
