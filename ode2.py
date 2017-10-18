@@ -47,7 +47,7 @@ class Ode(object):
         for i in range(self.steps):
             ax.add_patch(patches.Circle((coords[i,0],coords[i,1]), 0.05, color = 'r'))
 
-        plt.axis('scaled')
+        plt.axis('equal')
 
         plt.show()
 
@@ -57,7 +57,7 @@ class Ode(object):
         for i in range(self.steps):
             ax.add_patch(patches.Circle((coords1[i,0],coords1[i,1]), 0.005, color = 'r'))
             ax.add_patch(patches.Circle((coords2[i,0],coords2[i,1]), 0.005, color = 'g'))
-        plt.axis('scaled')
+        plt.axis('equal')
 
         plt.show()
 
@@ -67,7 +67,7 @@ class Ode(object):
         #ax.scatter(coords1[0],coords1[1]-coords2[1], c='purple', marker='.')
         for i in range(self.steps):
             ax.add_patch(patches.Circle((coords1[i,0],coords1[i,1]-coords2[i,1]), 0.0005, color = 'b'))
-        #ax.axis("equal")
-        plt.ylim(-0.0105,0.0105)
-        plt.xlim(-2,2)
+        ax.axis("tight")
+        #plt.ylim(-0.0105,0.0105)
+        #plt.xlim(-2,2)
         plt.show()

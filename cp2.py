@@ -11,15 +11,15 @@ from ode4 import Ode2
 
 ChargeDistribution().show()
 
-E = Ode(0.02,200,ChargeDistribution(),0, -2)
+E = Ode(0.04,100,ChargeDistribution(),0, -2)
 Euler = E.euler()
 Runge = E.RK4()
 E.plottwo(Euler, Runge)
 E.plotDiff(Euler, Runge)
 
-V = Ode2(0.02,200, Runge, 0, -2)
+V = Ode2(0.04,100, Runge, 0, -2)
 VEuler = V.euler()
 V.plot(VEuler)
-V2 = Ode2(0.02,200, Euler, 0, -2)
+V2 = Ode2(0.04,100, Euler, 0, -2)
 V2Euler = V2.euler()
 V2.plottwo(V2Euler, VEuler)
