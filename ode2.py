@@ -53,6 +53,7 @@ class Ode(object):
 
     def plottwo(self, coords1, coords2):
         ax = plt.axes()
+        ax = plt.axes()
         for i in range(self.steps):
             ax.add_patch(patches.Circle((coords1[i,0],coords1[i,1]), 0.005, color = 'r'))
             ax.add_patch(patches.Circle((coords2[i,0],coords2[i,1]), 0.005, color = 'g'))
@@ -63,7 +64,10 @@ class Ode(object):
 
     def plotDiff(self, coords1, coords2):
         ax = plt.axes()
+        #ax.scatter(coords1[0],coords1[1]-coords2[1], c='purple', marker='.')
         for i in range(self.steps):
             ax.add_patch(patches.Circle((coords1[i,0],coords1[i,1]-coords2[i,1]), 0.0005, color = 'b'))
-            plt.ylim(-0.01,0.01)
+        #ax.axis("equal")
+        plt.ylim(-0.0105,0.0105)
+        plt.xlim(-2,2)
         plt.show()
