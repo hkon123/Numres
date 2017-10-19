@@ -33,9 +33,10 @@ class Ode2(object):
         coords = np.array([x0,self.y0])
         for i in range(self.steps):
             k1 = self.discrete[i,1]
-            k2 = self.dist.evaluate(x0 + self.delta*0.5)
+            dy = self.discrete[i+1,1]-self.discrete[i,1]
+            k2 = self.discrete[i,1] + dy/2
             k3 = k2
-            k4 = self.dist.evaluate(x0 + self.delta)
+            k4 = self.discrete[i+1,1]
             y0 = y0 + self.delta*(float(k1)/6.0 + float(k2)/3.0 + float(k3)/3.0 + float(k4)/6.0)
             x0 = x0 + self.delta
             temp = np.array([x0,y0])
