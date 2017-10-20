@@ -5,8 +5,16 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 
+'''
+Class that can solve first order ODE( When dy/dx = f(x)) from either a continous function,
+a distribution as given in cp2,
+or a set of discrete values. Using the Euler and the Runge Kutta 4th method
+'''
+
 class Ode(object):
 
+    #initializer that sets the values of the function to be numerically integrated, the stepsize
+    #number of steps, and the boundary conditions
     def __init__(self, delta, steps, function, distribution, discrete, y0, x0):
         self.delta = delta
         self.steps = steps
@@ -16,6 +24,8 @@ class Ode(object):
         self.y0 = y0
         self.x0 = x0
 
+    #method solving the ODE using the Euler method, returns a discrete set
+    # of values for Y and x as a numpy array
     def euler(self):
         y0 = self.y0
         if self.func!= False:
@@ -35,6 +45,9 @@ class Ode(object):
             coords = np.vstack((coords,temp))
         return coords
 
+
+    #method for solving the ODE using the Runge kutta 4th method, returns a discrete sef of values for y and x
+    #as a numpy array
     def RK4(self):
         y0 = self.y0
         x0 = self.x0
