@@ -1,6 +1,12 @@
 import numpy as np
 from minimiser import Minimiser
 import scipy.optimize as opt
+from plots import Plotting
+
+'''
+class for reading in information from the text file
+Creates a numpy 3xn numpy array
+'''
 
 class Read(object):
 
@@ -21,8 +27,12 @@ class Read(object):
             i += 3
             k += 1
 
+'''
+script for calling the methods from the minimising class
+'''
+
+
 A = Read('testData.txt')
-#print(A.dataPoints)
 
 B = Minimiser(1e-9, 1, A.dataPoints)
 chi, it, m, c = B.minimize(1,1)
@@ -31,28 +41,11 @@ print(str(it) + " iterations")
 print("func = " + str(m) + "x + " + str(c))
 chi2 = B.package()
 print(chi2)
-B.plot()
-
-'''
-def package():
-    filename = 'testData.txt'
-
-    data = np.loadtxt(open(filename,"r"),delimiter="  ")
-
-    stress = data[:,0]
-    strain = data[:,1]
-    err_stress = data[:,2]
-    print(data)
-    x0 = np.array([0,1])
-
-    result =  opt.minimize(chisqfunc, x0)
-    return result
-
-def chisqfunc(a, b):
-    model = a + b*strain
-    chisq = np.sum(((stress - model)/err_stress)**2)
-    return chisq
-
-
-print(package())
-'''
+mcoords = B.createSpace(m, 1000, 0.002, c)
+Plotting().plot(mcoords, 1000, "plot of m agaist chi^2 around the true value of m")
+ccoords = B.createSpace(c, 1000, 0.01, m, m = False)
+Plotting().plot(ccoords, 1000, "plot of c agaist chi^2 around the true value of c")
+mError = B.getError(chi, m, mcoords, 1000)
+cError = B.getError(chi, c, ccoords, 1000)
+print("error in m is: " + str(mError))
+print("error in c is: " + str(cError))
